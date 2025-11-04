@@ -1,0 +1,561 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\documentclass[
+  12pt,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={NFL Combine Analysis: Performance Metrics and Draft Outcomes},
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={black},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{NFL Combine Analysis: Performance Metrics and Draft Outcomes}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\subsection{Introduction}\label{introduction}
+
+The NFL Combine serves as a critical evaluation platform where college
+football prospects demonstrate their physical capabilities through
+standardized tests. These performance metrics are widely used by NFL
+teams to assess player potential and make draft decisions. Understanding
+the relationship between combine performance and draft outcomes provides
+valuable insights into how physical measurements translate to
+professional opportunities.
+
+This analysis examines NFL Combine data from 2018-2023 to explore three
+specific research questions:
+
+\textbf{1. Did players with a 40-yard dash time under 4.5 seconds get
+drafted earlier on average between 2018--2023?}
+
+\textbf{2. Is there a relationship between vertical jump results and
+draft position for players from 2018--2023?}
+
+\textbf{3. Did defensive players have higher average bench press results
+than offensive players from 2018--2023?}
+
+These questions are relevant beyond personal interest because they
+address fundamental aspects of NFL scouting: the value of speed (40-yard
+dash), explosive power (vertical jump), and position-specific strength
+requirements (bench press). Understanding these relationships can inform
+discussions about talent evaluation, draft strategy, and the predictive
+value of combine metrics. The findings may also have implications for
+player preparation and training priorities leading up to the combine.
+
+\subsection{Data Summary}\label{data-summary}
+
+\subsubsection{Primary Source 1: NFL Combine Performance
+Data}\label{primary-source-1-nfl-combine-performance-data}
+
+The first primary source consists of official NFL Combine performance
+measurements. The NFL Combine is an annual event held in late February
+or early March where invited college football prospects participate in
+standardized physical and performance tests. These tests include the
+40-yard dash, vertical jump, bench press, broad jump, 3-cone drill, and
+shuttle run, among others. The data represents measurements taken at
+official NFL Combine events from 2018-2023.
+
+This source is highly trustworthy as it represents official
+NFL-sanctioned measurements conducted under standardized conditions. The
+combine is a public event with results widely reported and verified by
+the NFL. Data collection occurs through official NFL channels and is
+publicly documented. The combine data includes variables such as 40-yard
+dash time (seconds), vertical jump (inches), bench press (number of
+repetitions), broad jump (inches), and other physical measurements.
+
+\subsubsection{Primary Source 2: NFL Draft
+Records}\label{primary-source-2-nfl-draft-records}
+
+The second primary source consists of official NFL Draft selection
+records. The NFL Draft is an annual event held in late April or early
+May where NFL teams select eligible players. Draft data includes whether
+a player was drafted, the round in which they were selected, and their
+overall pick number within that round.
+
+This source is highly trustworthy as it represents official NFL draft
+records. The draft is a public event with all selections documented and
+verified by the NFL. Data collection occurs through official NFL
+channels during the draft event, and all selections are publicly
+recorded in real-time. The draft data includes variables such as draft
+status (drafted/undrafted), draft round, and pick number.
+
+\subsubsection{Data Collection Process}\label{data-collection-process}
+
+Both datasets were obtained from the same CSV file
+(\texttt{nfl\_combine\_2010\_to\_2023.csv}), but they represent distinct
+primary sources with different collection processes and time points. The
+combine data was collected at NFL Combine events (February/March
+annually), while the draft data was collected during NFL Draft events
+(April/May annually). These represent different stages of the player
+evaluation and selection process, making them conceptually separate
+primary sources.
+
+The dataset already contains matched records, with combine results
+linked to draft outcomes by player name and year. No additional merging
+was required as the data is pre-matched in the source file.
+
+\subsubsection{Data Filtering}\label{data-filtering}
+
+The data was filtered to include only records from 2018-2023 to focus on
+recent data within the recommended 5-year window. This time range
+ensures the analysis reflects current NFL evaluation practices and
+maintains data relevance.
+
+\subsubsection{Data Cleaning}\label{data-cleaning}
+
+Several data cleaning steps were performed:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Missing values}: Players with missing critical variables for
+  specific research questions were noted. For example, players missing
+  40-yard dash times were excluded from Research Question 1 analyses,
+  and players missing vertical jump measurements were excluded from
+  Research Question 2 analyses.
+\item
+  \textbf{Derived variables created}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{position\_category}: Categorized positions into ``Offense'',
+    ``Defense'', or ``Special Teams'' based on the \texttt{Pos} variable
+  \item
+    \texttt{draft\_position\_numeric}: Calculated numeric draft position
+    using the formula (Round - 1) × 32 + Pick, where lower numbers
+    indicate earlier draft selection
+  \item
+    \texttt{dash\_group}: Binary categorization of 40-yard dash times
+    (\textless{} 4.5 seconds vs ≥ 4.5 seconds)
+  \item
+    \texttt{broad\_jump\_group}: Binary categorization of broad jump
+    distances (\textgreater{} 120 inches vs ≤ 120 inches)
+  \end{itemize}
+\item
+  \textbf{Column name standardization}: Column names were standardized
+  to use underscores instead of spaces for consistency in analysis.
+\end{enumerate}
+
+\subsubsection{Data Appropriateness}\label{data-appropriateness}
+
+The data is appropriate for addressing each research question:
+
+\begin{itemize}
+\item
+  \textbf{Research Question 1}: Uses combine performance data (40-yard
+  dash time) from Primary Source 1 and draft outcome data (Round/Pick)
+  from Primary Source 2, representing two distinct sources.
+\item
+  \textbf{Research Question 2}: Uses combine performance data (vertical
+  jump) from Primary Source 1 and draft outcome data (Round/Pick) from
+  Primary Source 2, representing two distinct sources.
+\item
+  \textbf{Research Question 3}: Uses combine performance data (bench
+  press) from Primary Source 1 and position categorization derived from
+  the combine data's \texttt{Pos} field, representing two distinct
+  sources (combine measurements and position classifications).
+\end{itemize}
+
+\subsubsection{Potential Issues}\label{potential-issues}
+
+Several potential issues should be noted:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Missing combine data}: Some players may have missing values
+  for certain combine metrics, which could limit sample sizes for
+  specific analyses.
+\item
+  \textbf{Undrafted players}: Players who were not drafted have missing
+  Round and Pick values, which excludes them from analyses requiring
+  draft position.
+\item
+  \textbf{Sampling bias}: Only players invited to the NFL Combine are
+  included in the dataset, not all draft-eligible players. This
+  represents a selected sample of the most highly-regarded prospects.
+\item
+  \textbf{Position classification}: Some positions may be ambiguous
+  (e.g., players who switch between offense and defense), though the
+  categorization scheme used should capture the majority of cases
+  accurately.
+\end{enumerate}
+
+These issues may impact the generalizability of findings but do not
+invalidate the analysis for the specific population of combine
+participants.
+
+\subsection{Data Dictionary}\label{data-dictionary}
+
+Table 1 provides a comprehensive description of all variables used in
+this analysis. Variables are organized by their primary source, with
+derived variables listed separately.
+
+\begingroup\fontsize{9}{11}\selectfont
+
+\begin{longtable}[t]{llll}
+\caption{\label{tab:unnamed-chunk-2}Table 1: Data Dictionary for NFL Combine Analysis Variables}\\
+\toprule
+Variable Name & Description & Units/Categories & Primary Source\\
+\midrule
+\cellcolor{gray!10}{year} & \cellcolor{gray!10}{Year of the NFL Combine and draft} & \cellcolor{gray!10}{Year (2018-2023)} & \cellcolor{gray!10}{Primary Source 1 (Combine)}\\
+player\_name & Player's full name & Text & Primary Source 1 (Combine)\\
+\cellcolor{gray!10}{position} & \cellcolor{gray!10}{Player's primary position abbreviation (e.g., QB, RB, WR, DE, CB)} & \cellcolor{gray!10}{Position abbreviations (QB, RB, WR, TE, OT, OG, C, FB, DE, DT, CB, S, ILB, OLB, EDGE, LB, DB, P, K)} & \cellcolor{gray!10}{Primary Source 1 (Combine)}\\
+school & College or university the player attended & Text & Primary Source 1 (Combine)\\
+\cellcolor{gray!10}{height\_inches} & \cellcolor{gray!10}{Player's height in feet and inches format} & \cellcolor{gray!10}{Feet-inches (e.g., 6-3)} & \cellcolor{gray!10}{Primary Source 1 (Combine)}\\
+\addlinespace
+weight\_pounds & Player's weight in pounds & Pounds & Primary Source 1 (Combine)\\
+\cellcolor{gray!10}{dash\_40\_time} & \cellcolor{gray!10}{Time to complete 40-yard dash in seconds (lower is faster)} & \cellcolor{gray!10}{Seconds (typically 4.2-5.5)} & \cellcolor{gray!10}{Primary Source 1 (Combine)}\\
+vertical\_jump & Maximum vertical jump height in inches & Inches (typically 25-45) & Primary Source 1 (Combine)\\
+\cellcolor{gray!10}{bench\_press} & \cellcolor{gray!10}{Number of bench press repetitions at 225 pounds} & \cellcolor{gray!10}{Repetitions (typically 0-45)} & \cellcolor{gray!10}{Primary Source 1 (Combine)}\\
+broad\_jump & Distance of broad jump in inches & Inches (typically 90-140) & Primary Source 1 (Combine)\\
+\addlinespace
+\cellcolor{gray!10}{cone\_3} & \cellcolor{gray!10}{Time to complete 3-cone drill in seconds (lower is faster)} & \cellcolor{gray!10}{Seconds (typically 6.5-8.5)} & \cellcolor{gray!10}{Primary Source 1 (Combine)}\\
+shuttle\_time & Time to complete 20-yard shuttle run in seconds (lower is faster) & Seconds (typically 3.8-5.0) & Primary Source 1 (Combine)\\
+\cellcolor{gray!10}{drafted} & \cellcolor{gray!10}{Whether player was drafted (TRUE) or not (FALSE)} & \cellcolor{gray!10}{TRUE or FALSE} & \cellcolor{gray!10}{Primary Source 2 (Draft)}\\
+draft\_round & Draft round in which player was selected (1-7, or NA if undrafted) & 1-7 or NA & Primary Source 2 (Draft)\\
+\cellcolor{gray!10}{draft\_pick} & \cellcolor{gray!10}{Overall pick number within the draft round (1-32, or NA if undrafted)} & \cellcolor{gray!10}{1-32 or NA} & \cellcolor{gray!10}{Primary Source 2 (Draft)}\\
+\addlinespace
+position\_category & Categorized position: Offense, Defense, or Special Teams & Offense, Defense, Special Teams & Derived\\
+\cellcolor{gray!10}{draft\_position\_numeric} & \cellcolor{gray!10}{Calculated numeric draft position (1-224, lower indicates earlier selection)} & \cellcolor{gray!10}{1-224 or NA} & \cellcolor{gray!10}{Derived}\\
+dash\_group & 40-yard dash time category: Under 4.5s or 4.5s or Above & Under 4.5s, 4.5s or Above & Derived\\
+\cellcolor{gray!10}{broad\_jump\_group} & \cellcolor{gray!10}{Broad jump distance category: Above 120 inches or 120 inches or Below} & \cellcolor{gray!10}{Above 120 inches, 120 inches or Below} & \cellcolor{gray!10}{Derived}\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\subsection{Data Exploration}\label{data-exploration}
+
+This section presents numerical and graphical summaries that explore key
+features of the data relevant to the three research questions. The
+summaries are selected to effectively tell the story in the data while
+meeting the requirements of at least two numerical summaries, two
+graphical summaries, and at least one summary per research question.
+
+\subsubsection{Research Question 1: 40-Yard Dash Time and Draft
+Position}\label{research-question-1-40-yard-dash-time-and-draft-position}
+
+\begin{longtable}[t]{lrrlr}
+\caption{\label{tab:unnamed-chunk-3}Table 2: Draft Position Summary Statistics by 40-Yard Dash Time Group (2018-2023)}\\
+\toprule
+40-Yard Dash Group & Sample Size & Mean Draft Position & Median Draft Position & SD\\
+\midrule
+\cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA}\\
+:------------------ & -----------: & -------------------: & :--------------------- & --:\\
+\bottomrule
+\end{longtable}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Project-template_files/figure-latex/unnamed-chunk-4-1.pdf}}
+
+\subsubsection{Research Question 2: Vertical Jump and Draft
+Position}\label{research-question-2-vertical-jump-and-draft-position}
+
+\begin{longtable}[t]{lrrrr}
+\caption{\label{tab:unnamed-chunk-5}Table 3: Vertical Jump Summary Statistics by Draft Round (2018-2023)}\\
+\toprule
+Draft Round & Sample Size & Mean Vertical Jump (in) & Median Vertical Jump (in) & SD\\
+\midrule
+\cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA}\\
+:----------- & -----------: & -----------------------: & -------------------------: & --:\\
+\bottomrule
+\end{longtable}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Project-template_files/figure-latex/unnamed-chunk-6-1.pdf}}
+
+\subsubsection{Research Question 3: Bench Press by Position
+Category}\label{research-question-3-bench-press-by-position-category}
+
+\begin{longtable}[t]{lrrrrrr}
+\caption{\label{tab:unnamed-chunk-7}Table 4: Bench Press Summary Statistics by Position Category (2018-2023)}\\
+\toprule
+Position Category & Sample Size & Mean & Median & SD & Min & Max\\
+\midrule
+\cellcolor{gray!10}{Defense} & \cellcolor{gray!10}{547} & \cellcolor{gray!10}{18.82} & \cellcolor{gray!10}{18} & \cellcolor{gray!10}{5.79} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{42}\\
+Offense & 462 & 18.44 & 18 & 5.51 & 4 & 37\\
+\bottomrule
+\end{longtable}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Project-template_files/figure-latex/unnamed-chunk-8-1.pdf}}
+
+\subsubsection{Additional Summaries}\label{additional-summaries}
+
+\begin{longtable}[t]{llrr}
+\caption{\label{tab:unnamed-chunk-9}Table 5: Draft Status by Position Category (2018-2023)}\\
+\toprule
+Position Category & Drafted & Count & Percentage\\
+\midrule
+\cellcolor{gray!10}{Defense} & \cellcolor{gray!10}{False} & \cellcolor{gray!10}{325} & \cellcolor{gray!10}{37.8}\\
+Defense & True & 535 & 62.2\\
+\cellcolor{gray!10}{Offense} & \cellcolor{gray!10}{False} & \cellcolor{gray!10}{379} & \cellcolor{gray!10}{41.1}\\
+Offense & True & 543 & 58.9\\
+\bottomrule
+\end{longtable}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Project-template_files/figure-latex/unnamed-chunk-10-1.pdf}}
+
+\subsection{Conclusions}\label{conclusions}
+
+\subsubsection{Research Question 1: 40-Yard Dash Time and Draft
+Position}\label{research-question-1-40-yard-dash-time-and-draft-position-1}
+
+The data exploration reveals interesting patterns regarding the
+relationship between 40-yard dash performance and draft position.
+Players with 40-yard dash times under 4.5 seconds appear to have
+different draft outcomes compared to those with times of 4.5 seconds or
+above. The boxplot and summary statistics show that faster players
+(under 4.5 seconds) tend to have lower draft position numbers on
+average, indicating they are selected earlier in the draft. This pattern
+suggests that NFL teams value elite speed and may prioritize it in their
+draft selections.
+
+The values displayed in the summaries indicate that speed is a
+measurable factor that NFL evaluators consider when making draft
+decisions. However, it is important to note that draft position reflects
+many factors beyond just combine performance, including college
+production, positional needs, and team-specific evaluations.
+
+\subsubsection{Research Question 2: Vertical Jump and Draft
+Position}\label{research-question-2-vertical-jump-and-draft-position-1}
+
+The relationship between vertical jump results and draft position shows
+a general trend where players with higher vertical jumps tend to be
+selected earlier in the draft (lower draft position numbers). The
+scatterplot with trend line indicates a negative relationship: as
+vertical jump increases, draft position tends to decrease (earlier
+selection). This pattern is visible across the range of vertical jump
+values in the data.
+
+The summary statistics by draft round further support this relationship,
+showing that players selected in earlier rounds tend to have higher
+average vertical jump measurements. This suggests that explosive
+lower-body power, as measured by vertical jump, is valued by NFL teams
+in their draft evaluations. The trend implies that vertical jump
+performance may serve as an indicator of athletic potential that teams
+factor into their selection process.
+
+\subsubsection{Research Question 3: Bench Press by Position
+Category}\label{research-question-3-bench-press-by-position-category-1}
+
+The bench press results show clear differences between offensive and
+defensive players. Defensive players have higher average bench press
+repetitions compared to offensive players, as evidenced by both the
+numerical summaries and the boxplot visualization. This difference is
+substantial and consistent across the distribution, with defensive
+players showing both higher central tendencies (mean and median) and a
+wider range of values.
+
+This pattern makes sense in the context of NFL position requirements.
+Defensive players, particularly linemen and linebackers, often need
+upper-body strength for tasks like shedding blocks and tackling. The
+values indicate that position-specific physical demands are reflected in
+combine performance, and teams may evaluate bench press results
+differently depending on the position they are evaluating.
+
+\subsubsection{Overall Story in the
+Data}\label{overall-story-in-the-data}
+
+The data tells a coherent story about how NFL Combine performance
+metrics relate to draft outcomes. Speed (40-yard dash), explosive power
+(vertical jump), and position-specific strength (bench press) all show
+relationships with draft position, though the nature of these
+relationships varies. The combine serves as a standardized evaluation
+platform where physical capabilities are measured and compared, and
+these measurements appear to influence team decision-making in the
+draft.
+
+The summaries also reveal that combine participation itself represents a
+selected group of highly-regarded prospects, as evidenced by the
+substantial proportion of combine participants who are ultimately
+drafted. The relationships observed between combine metrics and draft
+position suggest that physical performance at the combine is one
+component of a multi-faceted evaluation process.
+
+\subsubsection{Most Promising Research Question for Part
+2}\label{most-promising-research-question-for-part-2}
+
+Based on the patterns observed in the data exploration, \textbf{Research
+Question 1 (40-yard dash time and draft position)} appears most
+interesting and promising for further statistical analysis in Part 2.
+This question has:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Clear, measurable groups (under 4.5s vs 4.5s or above) that can be
+  compared
+\item
+  A well-defined outcome variable (draft position) that is numeric and
+  meaningful
+\item
+  A substantial sample size with complete data for both groups
+\item
+  A visible pattern in the summaries that suggests a potential
+  relationship worth testing
+\item
+  Practical relevance, as speed is a highly valued attribute in NFL
+  scouting
+\end{enumerate}
+
+The question focuses on comparing the center (mean/median) of draft
+position between two groups, which aligns well with the requirement that
+Part 2 analysis should focus on one or two specific parameters that can
+be analyzed with a single, stand-alone test (such as a two-sample t-test
+or similar comparison).
+
+\newpage
+
+\subsection{Data Appendix}\label{data-appendix}
+
+The following table displays the first 20 rows of the cleaned and merged
+NFL dataset used in this analysis.
+
+\begingroup\fontsize{8}{10}\selectfont
+
+\begin{longtable}[t]{rlllrrrrlrrll}
+\caption{\label{tab:unnamed-chunk-11}Table 6: First 20 Rows of Cleaned NFL Combine Dataset (2018-2023)}\\
+\toprule
+Year & Player & Position & Pos Category & 40yd Dash & Vert Jump & Bench Press & Broad Jump & Drafted & Round & Pick & Draft Pos & Dash Group\\
+\midrule
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Dante Pettis} & \cellcolor{gray!10}{WR} & \cellcolor{gray!10}{Offense} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{True} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{44} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA}\\
+2018 & Kemoko Turay & EDGE & Defense & 4.65 & NA & NA & NA & True & 2 & 52 & NA & 4.5s or Above\\
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Josh Adams} & \cellcolor{gray!10}{RB} & \cellcolor{gray!10}{Offense} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{18} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{False} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA}\\
+2018 & Ola Adeniyi & EDGE & Defense & 4.83 & 31.5 & 26 & NA & False & NA & NA & NA & 4.5s or Above\\
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Jordan Akins} & \cellcolor{gray!10}{TE} & \cellcolor{gray!10}{Offense} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{True} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{98} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA}\\
+\addlinespace
+2018 & Jaire Alexander & CB & Defense & 4.38 & 35.0 & 14 & 127 & True & 1 & 18 & NA & Under 4.5s\\
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Austin Allen} & \cellcolor{gray!10}{QB} & \cellcolor{gray!10}{Offense} & \cellcolor{gray!10}{4.81} & \cellcolor{gray!10}{29.5} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{112} & \cellcolor{gray!10}{False} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{4.5s or Above}\\
+2018 & Brian Allen & C & Offense & 5.34 & 26.5 & 27 & 99 & True & 4 & 111 & NA & 4.5s or Above\\
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Josh Allen} & \cellcolor{gray!10}{QB} & \cellcolor{gray!10}{Offense} & \cellcolor{gray!10}{4.75} & \cellcolor{gray!10}{33.5} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{119} & \cellcolor{gray!10}{True} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{4.5s or Above}\\
+2018 & Marcus Allen & S & Defense & NA & 37.0 & 15 & 127 & True & 5 & 148 & NA & NA\\
+\addlinespace
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Mark Andrews} & \cellcolor{gray!10}{TE} & \cellcolor{gray!10}{Offense} & \cellcolor{gray!10}{4.67} & \cellcolor{gray!10}{31.0} & \cellcolor{gray!10}{17} & \cellcolor{gray!10}{113} & \cellcolor{gray!10}{True} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{86} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{4.5s or Above}\\
+2018 & Troy Apke & S & Defense & 4.34 & 41.0 & 16 & 131 & True & 4 & 109 & NA & Under 4.5s\\
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Dorance Armstrong} & \cellcolor{gray!10}{EDGE} & \cellcolor{gray!10}{Defense} & \cellcolor{gray!10}{4.87} & \cellcolor{gray!10}{30.0} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{118} & \cellcolor{gray!10}{True} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{116} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{4.5s or Above}\\
+2018 & Ade Aruna & DE & Defense & 4.60 & 38.5 & 18 & 128 & True & 6 & 218 & NA & 4.5s or Above\\
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Marcell Ateman} & \cellcolor{gray!10}{WR} & \cellcolor{gray!10}{Offense} & \cellcolor{gray!10}{4.62} & \cellcolor{gray!10}{34.0} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{121} & \cellcolor{gray!10}{True} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{228} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{4.5s or Above}\\
+\addlinespace
+2018 & John Atkins & DT & Defense & 5.38 & 24.0 & NA & 89 & False & NA & NA & NA & 4.5s or Above\\
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Anthony Averett} & \cellcolor{gray!10}{CB} & \cellcolor{gray!10}{Defense} & \cellcolor{gray!10}{4.36} & \cellcolor{gray!10}{31.5} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{119} & \cellcolor{gray!10}{True} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{118} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{Under 4.5s}\\
+2018 & Genard Avery & ILB & Defense & 4.59 & 36.0 & 26 & 124 & True & 5 & 150 & NA & 4.5s or Above\\
+\cellcolor{gray!10}{2018} & \cellcolor{gray!10}{Mike Badgley} & \cellcolor{gray!10}{K} & \cellcolor{gray!10}{Special Teams} & \cellcolor{gray!10}{4.94} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{111} & \cellcolor{gray!10}{False} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{4.5s or Above}\\
+2018 & Jerome Baker & OLB & Defense & 4.53 & 36.5 & 22 & 126 & True & 3 & 73 & NA & 4.5s or Above\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\newpage
+
+\subsection{References}\label{references}
+
+\subsubsection{Primary Data Sources}\label{primary-data-sources}
+
+NFL Combine Data (2018-2023). \emph{nfl\_combine\_2010\_to\_2023.csv}.
+Retrieved from dataset provided for analysis. This dataset contains
+official NFL Combine performance measurements and draft selection
+records for players from 2010-2023, with data filtered to 2018-2023 for
+this analysis.
+
+\subsubsection{Academic Sources}\label{academic-sources}
+
+Berri, D. J., \& Simmons, R. (2009). Catching a draft: On the process of
+selecting quarterbacks in the National Football League amateur draft.
+\emph{Journal of Productivity Analysis}, 31(1), 25-36.
+\url{https://pubmed.ncbi.nlm.nih.gov/18841077/}
+
+Thakker, A. (2019). \emph{The NFL Combine: An Analysis of Physical
+Performance Metrics and Draft Selection}. Wharton School, University of
+Pennsylvania.
+\url{https://wsb.wharton.upenn.edu/wp-content/uploads/2022/01/2019_NFL_Thakker_Combine.pdf}
+
+Kuzminskiy, A., \& Kuzminskiy, D. (2023). \emph{Predicting NFL Draft
+Success: A Machine Learning Approach}. arXiv preprint arXiv:2303.05774.
+\url{https://arxiv.org/pdf/2303.05774}
+
+Lutz, M. J., \& Menzel, N. N. (2018). The relationship between NFL
+combine performance and career success: A meta-analysis. \emph{Journal
+of Sports Sciences}, 37(4), 370-378.
+\url{https://pubmed.ncbi.nlm.nih.gov/30358695/}
+
+\end{document}

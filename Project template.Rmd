@@ -1,5 +1,6 @@
 ---
-title: "NFL Combine Analysis: Performance Metrics and Draft Outcomes" 
+title: "NFL Combine Analysis: Performance Metrics and Draft Outcomes"
+author: "Srimaan Bekkari & Leo Lee"
 fontsize: 12pt
 geometry: margin=1in
 urlcolor: black
@@ -503,4 +504,5 @@ Thakker, A. (2019). *The NFL Combine: An Analysis of Physical Performance Metric
 Kuzminskiy, A., & Kuzminskiy, D. (2023). *Predicting NFL Draft Success: A Machine Learning Approach*. arXiv preprint arXiv:2303.05774. https://arxiv.org/pdf/2303.05774
 
 Lutz, M. J., & Menzel, N. N. (2018). The relationship between NFL combine performance and career success: A meta-analysis. *Journal of Sports Sciences*, 37(4), 370-378. https://pubmed.ncbi.nlm.nih.gov/30358695/
+
 
